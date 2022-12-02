@@ -1,0 +1,4 @@
+{
+    "purescript.pursExe": "node_modules/purescript/purs.bin",
+    "purescript.addNpmPath": true
+}
