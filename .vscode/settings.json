@@ -1,4 +1,9 @@
 {
-    "purescript.pursExe": "node_modules/purescript/purs.bin",
-    "purescript.addNpmPath": true
+    "purescript.pursExe": "./node_modules/purescript/purs.bin",
+    "purescript.addNpmPath": true,
+    "[purescript]": {
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2
+    },
+
 }
