@@ -5,6 +5,7 @@ You can edit this file as you like.
 { name = "my-project"
 , dependencies =
   [ "arrays"
+  , "bifunctors"
   , "console"
   , "effect"
   , "foldable-traversable"
@@ -14,7 +15,6 @@ You can edit this file as you like.
   , "maybe"
   , "newtype"
   , "nonempty"
-  , "ordered-collections"
   , "prelude"
   , "psci-support"
   , "strings"
