@@ -3,7 +3,7 @@ module Main where
 import Prelude
 import Effect (Effect)
 -- import Effect.Console (log)
-import Ch13 as Ch13
+import Ch15 as Ch15
 
 main :: Effect Unit
-main = Ch13.test
+main = Ch15.test
