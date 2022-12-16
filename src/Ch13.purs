@@ -20,14 +20,14 @@ test = do
   log $ show $ (_ / 2) <$> Tuple 10 20
   log $ show $ (_ / 2) <$> Threeple 10 20 40
   log $ show $ "Maybe Identity for Nothing: " <> show ((identity <$> Nothing) == (Nothing :: Maybe Unit))
-  log $ show $ rmap (_ * 2) $ (Left "error reason" :: Either _ Unit)
-  log $ show $ rmap (_ * 2) $ (Right 10 :: Either Unit _)
-  log $ show $ lmap toUpper $ (Left "error reason" :: Either _ Unit)
-  log $ show $ lmap toUpper $ Right 10
-  log $ show $ rmap (_ * 2) $ Tuple 80 40
-  log $ show $ lmap (_ / 2) $ Tuple 80 40
-  log $ show $ bimap (_ / 2) (_ * 2) $ Tuple 80 40
 
+-- log $ show $ rmap (_ * 2) $ (Left "error reason" :: Either _ Unit)
+-- log $ show $ rmap (_ * 2) $ (Right 10 :: Either Unit _)
+-- log $ show $ lmap toUpper $ (Left "error reason" :: Either _ Unit)
+-- log $ show $ lmap toUpper $ Right 10
+-- log $ show $ rmap (_ * 2) $ Tuple 80 40
+-- log $ show $ lmap (_ / 2) $ Tuple 80 40
+-- log $ show $ bimap (_ / 2) (_ * 2) $ Tuple 80 40
 data Maybe a
   = Nothing
   | Just a
@@ -58,6 +58,8 @@ data Either a b
   = Left a
   | Right b
 
+derive instance genericEither :: Generic (Either a b) _
+
 instance showEither :: (Show a, Show b) => Show (Either a b) where
   show = genericShow
 
@@ -79,11 +81,10 @@ instance showThreeple :: (Show a, Show b, Show c) => Show (Threeple a b c) where
 instance functorThreeple :: Functor (Threeple a b) where
   map f (Threeple x y z) = Threeple x y $ f z
 
-instance bifunctorEither :: Bifunctor (Either) where
-  bimap :: ∀ a b c d. (a -> c) -> (b -> d) -> f a b -> f c d
-  bimap f _ (Left err) = Left $ f err
-  bimap _ g (Right x) = Right $ g x
-
+-- instance bifunctorEither :: Bifunctor (Either) where
+--   bimap :: ∀ a b c d. (a -> c) -> (b -> d) -> f a b -> f c d
+--   bimap f _ (Left err) = Left $ f err
+--   bimap _ g (Right x) = Right $ g x
 -- rmap :: ∀ f a b c. Bifunctor f => (b -> c) -> f a b -> f a c
 -- rmap = bimap identity
 -- lmap f = bimap f identity
