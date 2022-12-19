@@ -5,12 +5,14 @@ module Ch15
   ) where
 
 import Prelude
-import Data.Foldable (class Foldable, foldl)
+import Control.Alt (class Alt)
+import Data.Foldable (class Foldable, foldl, foldr)
 import Data.Functor.Contravariant (class Contravariant, cmap, (>$<))
 import Data.Int.Bits ((.&.))
 import Data.List (List(..), (:))
 import Data.Profunctor (class Profunctor, dimap)
 import Data.String.CodePoints (length)
+import Data.Traversable (class Traversable, sequence, traverse)
 import Effect (Effect)
 import Effect.Console (log)
 
@@ -63,3 +65,17 @@ runFoldL (Moore s0 output transition) = output <<< foldl transition s0
 sizer :: Moore Int String String
 -- sizer xs = Moore 0 (\len -> "Length is " <> show len) (\l s -> l + length s)
 sizer = dimap length (\len -> "Size is " <> show len) addr
+
+-- instance traversableList :: Traversable List where
+--   traverse :: ∀ a b m. Applicative m => (a -> m b) -> List a -> m (List b)
+--   traverse f = foldr (\x acc -> (:) <$> f x <*> acc) (pure Nil)
+--   sequence :: ∀ a m. Applicative m => List (m a) -> m (List a)
+--   sequence = traverse identity
+-- instance altList :: Alt List where
+--   alt = (<>)
+-- instance altMaybe :: Alt Maybe where
+--   alt Nothing r = r
+--   alt l _ = l
+-- instance altEither :: Alt (Either a) where
+--   alt (Left _) r = r
+--   alt l _ = l
