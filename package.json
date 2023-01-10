@@ -1,10 +1,11 @@
 {
   "name": "fp-book",
   "version": "1.0.0",
-  "description": "",
+  "description": "Exercises for \"Functional Programming Made Easier\"",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx spago test",
+    "build": "npx spago build"
   },
   "keywords": [],
   "author": "",
